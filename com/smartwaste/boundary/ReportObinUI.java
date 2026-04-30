@@ -7,11 +7,7 @@ import com.smartwaste.entity.Reports;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-/**
- * ReportObinUI - Boundary class for the Report Overflowing Bin use case.
- * Provides CLI interface for citizens to submit bin complaints
- * and view their complaint statuses.
- */
+
 public class ReportObinUI {
     private Scanner scanner;
     private ReportObinController reportController;
@@ -23,9 +19,7 @@ public class ReportObinUI {
         this.iotController = new IoTController();
     }
 
-    /**
-     * Display the report form and collect bin details from the citizen.
-     */
+    
     public void displayReportForm(Citizen citizen) {
         System.out.println("\n=========================================");
         System.out.println("      REPORT OVERFLOWING BIN FORM");
@@ -34,7 +28,7 @@ public class ReportObinUI {
                 + " | Ward : " + citizen.getWard());
         System.out.println("-----------------------------------------");
 
-        // Collect bin details from citizen
+        
         String[] details = getBinDetails();
         if (details == null) return;
 
@@ -43,7 +37,7 @@ public class ReportObinUI {
         String fillLevelStr = details[2];
         String description = details[3];
 
-        // Parse fill level
+        
         int fillLevel;
         try {
             fillLevel = Integer.parseInt(fillLevelStr);
@@ -52,13 +46,13 @@ public class ReportObinUI {
             return;
         }
 
-        // Display IoT simulation result
+        
         String binStatus = iotController.calculateBinStatus(fillLevel);
         System.out.println("\n  [IoT Sensor Simulation]");
         System.out.println("  Fill Level : " + fillLevel + "%");
         System.out.println("  Bin Status : " + binStatus);
 
-        // Submit report through controller
+        
         try {
             Reports report = reportController.submitReport(citizen, binId, location,
                     fillLevel, description);
@@ -71,9 +65,7 @@ public class ReportObinUI {
         }
     }
 
-    /**
-     * Collect bin details from user via CLI input.
-     */
+    
     public String[] getBinDetails() {
         System.out.print("  Enter Bin ID          : ");
         String binId = scanner.nextLine().trim();
@@ -90,9 +82,7 @@ public class ReportObinUI {
         return new String[]{binId, location, fillLevel, description};
     }
 
-    /**
-     * Display complaint statuses for the logged-in citizen (TC_15).
-     */
+    
     public void showReportStatus(Citizen citizen) {
         System.out.println("\n=========================================");
         System.out.println("        YOUR COMPLAINT STATUS");

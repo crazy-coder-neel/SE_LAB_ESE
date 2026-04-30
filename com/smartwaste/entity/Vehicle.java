@@ -1,22 +1,19 @@
 package com.smartwaste.entity;
 
-/**
- * Vehicle Entity Class - Represents a waste collection vehicle.
- * Each vehicle is optionally assigned to a driver and tracks availability.
- */
+
 public class Vehicle {
     private String vehicleId;
     private String driverId;
     private boolean availability;
 
-    // Constructor
+    
     public Vehicle(String vehicleId, String driverId, boolean availability) {
         this.vehicleId = vehicleId;
         this.driverId = driverId;
         this.availability = availability;
     }
 
-    // Getters and Setters
+    
     public String getVehicleId() { return vehicleId; }
     public void setVehicleId(String vehicleId) { this.vehicleId = vehicleId; }
 

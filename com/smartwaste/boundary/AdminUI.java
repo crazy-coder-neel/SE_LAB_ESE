@@ -8,11 +8,7 @@ import com.smartwaste.main.DataStore;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-/**
- * AdminUI - Boundary class for the Admin dashboard.
- * Provides CLI interface for viewing complaints, assigning vehicles,
- * updating report statuses, and viewing notifications.
- */
+
 public class AdminUI {
     private Scanner scanner;
     private ReportObinController reportController;
@@ -26,15 +22,13 @@ public class AdminUI {
         this.dataStore = DataStore.getInstance();
     }
 
-    /**
-     * Display all complaints/reports in the system (TC_13).
-     */
+    
     public void displayComplaints() {
         System.out.println("\n=========================================");
         System.out.println("        ADMIN - ALL COMPLAINTS");
         System.out.println("=========================================");
 
-        // Display pending notifications
+        
         ArrayList<String> notifications = dataStore.getAdminNotifications();
         if (!notifications.isEmpty()) {
             System.out.println("\n  --- NOTIFICATIONS ---");
@@ -44,7 +38,7 @@ public class AdminUI {
             System.out.println("  ---------------------\n");
         }
 
-        // Display all reports
+        
         ArrayList<Reports> reports = reportController.getAllReports();
         if (reports.isEmpty()) {
             System.out.println("  No complaints found in the system.");
@@ -58,15 +52,13 @@ public class AdminUI {
         }
     }
 
-    /**
-     * Display the vehicle assignment menu and process assignment (TC_14).
-     */
+    
     public void assignVehicleMenu() {
         System.out.println("\n=========================================");
         System.out.println("      ADMIN - ASSIGN VEHICLE");
         System.out.println("=========================================");
 
-        // Show pending reports
+        
         ArrayList<Reports> reports = reportController.getAllReports();
         System.out.println("  Pending/Unassigned Reports:");
         boolean hasPending = false;
@@ -83,7 +75,7 @@ public class AdminUI {
             return;
         }
 
-        // Show available vehicles
+        
         System.out.println("\n  Available Vehicles:");
         ArrayList<Vehicle> vehicles = dataStore.getVehicles();
         boolean hasAvailable = false;
@@ -114,9 +106,7 @@ public class AdminUI {
         }
     }
 
-    /**
-     * Update the status of a report manually.
-     */
+    
     public void updateStatusMenu() {
         System.out.println("\n=========================================");
         System.out.println("      ADMIN - UPDATE REPORT STATUS");

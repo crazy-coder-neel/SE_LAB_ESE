@@ -4,10 +4,7 @@ import com.smartwaste.control.LoginController;
 import com.smartwaste.entity.User;
 import java.util.Scanner;
 
-/**
- * LoginUI - Boundary class for user login interface.
- * Handles CLI-based user authentication display and input.
- */
+
 public class LoginUI {
     private Scanner scanner;
     private LoginController loginController;
@@ -17,9 +14,7 @@ public class LoginUI {
         this.loginController = new LoginController();
     }
 
-    /**
-     * Display the login header/banner.
-     */
+    
     public void displayLogin() {
         System.out.println("\n=========================================");
         System.out.println("    SMART WASTE MANAGEMENT SYSTEM");
@@ -27,9 +22,7 @@ public class LoginUI {
         System.out.println("=========================================");
     }
 
-    /**
-     * Get user credentials via CLI input and attempt authentication.
-     */
+    
     public User getCredentials() {
         displayLogin();
         System.out.print("  Enter Username : ");

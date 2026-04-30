@@ -4,10 +4,7 @@ import com.smartwaste.entity.*;
 import com.smartwaste.main.DataStore;
 import java.util.ArrayList;
 
-/**
- * VehicleAssignmentController - Control class for vehicle assignment operations.
- * Handles assigning vehicles to reports, releasing vehicles, and marking tasks complete.
- */
+
 public class VehicleAssignmentController {
     private DataStore dataStore;
 
@@ -15,11 +12,9 @@ public class VehicleAssignmentController {
         this.dataStore = DataStore.getInstance();
     }
 
-    /**
-     * Assign a vehicle to a specific report (TC_14).
-     */
+    
     public Vehicle assignVehicle(String reportId, String vehicleId) throws Exception {
-        // Find the report
+        
         Reports report = null;
         for (Reports r : dataStore.getReports()) {
             if (r.getReportId().equalsIgnoreCase(reportId)) {
@@ -31,7 +26,7 @@ public class VehicleAssignmentController {
             throw new Exception("Report ID " + reportId + " not found.");
         }
 
-        // Find the vehicle
+        
         Vehicle vehicle = null;
         for (Vehicle v : dataStore.getVehicles()) {
             if (v.getVehicleId().equalsIgnoreCase(vehicleId)) {
@@ -46,7 +41,7 @@ public class VehicleAssignmentController {
             throw new Exception("Vehicle " + vehicleId + " is currently unavailable.");
         }
 
-        // Assign vehicle to report and update statuses
+        
         report.setAssignedVehicleId(vehicleId);
         report.updateStatus("Assigned");
         vehicle.setAvailability(false);
@@ -54,9 +49,7 @@ public class VehicleAssignmentController {
         return vehicle;
     }
 
-    /**
-     * Release a vehicle back to available status.
-     */
+    
     public void releaseVehicle(String vehicleId) {
         for (Vehicle v : dataStore.getVehicles()) {
             if (v.getVehicleId().equalsIgnoreCase(vehicleId)) {
@@ -66,9 +59,7 @@ public class VehicleAssignmentController {
         }
     }
 
-    /**
-     * Get all reports assigned to a specific driver.
-     */
+    
     public ArrayList<Reports> getAssignedReports(String driverId) {
         ArrayList<Reports> assignedReports = new ArrayList<>();
         for (Reports report : dataStore.getReports()) {
@@ -87,9 +78,7 @@ public class VehicleAssignmentController {
         return assignedReports;
     }
 
-    /**
-     * Mark a report as completed/resolved and release the vehicle (TC_15).
-     */
+    
     public void markCompleted(String reportId) throws Exception {
         for (Reports report : dataStore.getReports()) {
             if (report.getReportId().equalsIgnoreCase(reportId)) {
@@ -97,7 +86,7 @@ public class VehicleAssignmentController {
                     report.updateStatus("Resolved");
                     releaseVehicle(report.getAssignedVehicleId());
 
-                    // Reset the bin to empty state
+                    
                     for (Bin bin : dataStore.getBins()) {
                         if (bin.getBinId().equalsIgnoreCase(report.getBinId())) {
                             bin.setFillLevel(0);
@@ -113,9 +102,7 @@ public class VehicleAssignmentController {
         throw new Exception("Report ID " + reportId + " not found.");
     }
 
-    /**
-     * Update a report's status manually.
-     */
+    
     public void updateReportStatus(String reportId, String status) throws Exception {
         for (Reports report : dataStore.getReports()) {
             if (report.getReportId().equalsIgnoreCase(reportId)) {

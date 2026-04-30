@@ -6,13 +6,10 @@ import com.smartwaste.boundary.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-/**
- * SmartWasteTestRunner - Automated test runner for Black Box and White Box testing.
- * Provides a menu-driven CLI to run all 15 BB and 15 WB test cases.
- */
+
 public class SmartWasteTestRunner {
 
-    // ANSI color codes for terminal output
+    
     static final String RESET  = "\033[0m";
     static final String GREEN  = "\033[32m";
     static final String RED    = "\033[31m";
@@ -67,9 +64,9 @@ public class SmartWasteTestRunner {
         scanner.close();
     }
 
-    // ============================================================
-    //  BLACK BOX TESTS
-    // ============================================================
+    
+    
+    
     public static void runBlackBoxTests() {
         passed = 0;
         failed = 0;
@@ -78,65 +75,65 @@ public class SmartWasteTestRunner {
         System.out.println(BOLD + "  BLACK BOX TEST CASES (15)" + RESET);
         System.out.println(CYAN + "==========================================================" + RESET);
 
-        // Fresh DataStore for each test run
+        
         resetDataStore();
 
-        // TC_01: Citizen reports after login
+        
         bb01();
         resetDataStore();
 
-        // TC_02: Report without login blocked
+        
         bb02();
 
-        // TC_03: Valid bin ID accepted
+        
         resetDataStore();
         bb03();
 
-        // TC_04: Invalid bin ID rejected
+        
         resetDataStore();
         bb04();
 
-        // TC_05: Empty description rejected
+        
         resetDataStore();
         bb05();
 
-        // TC_06: Fill level >= 80 accepted
+        
         resetDataStore();
         bb06();
 
-        // TC_07: Fill level < 80 rejected
+        
         resetDataStore();
         bb07();
 
-        // TC_08: Own ward bin accepted
+        
         resetDataStore();
         bb08();
 
-        // TC_09: Other ward bin denied
+        
         resetDataStore();
         bb09();
 
-        // TC_10: Duplicate complaint prevented
+        
         resetDataStore();
         bb10();
 
-        // TC_11: Valid location accepted
+        
         resetDataStore();
         bb11();
 
-        // TC_12: Empty location rejected
+        
         resetDataStore();
         bb12();
 
-        // TC_13: Admin receives notification
+        
         resetDataStore();
         bb13();
 
-        // TC_14: Vehicle assigned
+        
         resetDataStore();
         bb14();
 
-        // TC_15: Citizen sees Resolved
+        
         resetDataStore();
         bb15();
 
@@ -163,7 +160,7 @@ public class SmartWasteTestRunner {
         String id = "BB-02";
         String input = "No login, direct report attempt";
         String expected = "System requires login first (no citizen menu access)";
-        // Without login, SmartWasteApp only shows Main Menu - no Report option
+        
         String given = "System requires login first (no citizen menu access)";
         printResult(id, input, expected, given);
     }
@@ -358,9 +355,9 @@ public class SmartWasteTestRunner {
         printResult(id, input, expected, given);
     }
 
-    // ============================================================
-    //  WHITE BOX TESTS
-    // ============================================================
+    
+    
+    
     public static void runWhiteBoxTests() {
         passed = 0;
         failed = 0;
@@ -460,8 +457,8 @@ public class SmartWasteTestRunner {
         String given;
         try {
             ReportObinController rc = new ReportObinController();
-            Bin bin = rc.validateBin("BIN003"); // Ward-B
-            Citizen c = (Citizen) new LoginController().authenticate("citizen1", "pass123"); // Ward-A
+            Bin bin = rc.validateBin("BIN003"); 
+            Citizen c = (Citizen) new LoginController().authenticate("citizen1", "pass123"); 
             rc.validateWard(bin, c);
             given = "No exception";
         } catch (Exception e) { given = e.getMessage().contains("Access denied") ? "Access denied" : e.getMessage(); }
@@ -510,7 +507,7 @@ public class SmartWasteTestRunner {
             VehicleAssignmentController vc = new VehicleAssignmentController();
             vc.assignVehicle("RPT001", "VH001");
             vc.markCompleted("RPT001");
-            // Now submit again - should work since previous is Resolved
+            
             Reports r2 = rc.submitReport(c, "BIN001", "Main St", 90, "Second after resolve");
             given = (r2 != null) ? "SUCCESS" : "FAIL";
         } catch (Exception e) { given = e.getMessage(); }
@@ -562,7 +559,7 @@ public class SmartWasteTestRunner {
             VehicleAssignmentController vc = new VehicleAssignmentController();
             vc.assignVehicle("RPT001", "VH001");
             vc.markCompleted("RPT001");
-            // Check bin was reset
+            
             Bin bin = null;
             for (Bin b : DataStore.getInstance().getBins()) {
                 if (b.getBinId().equals("BIN001")) { bin = b; break; }
@@ -624,9 +621,9 @@ public class SmartWasteTestRunner {
         printWBResult(id, input, type, expected, given);
     }
 
-    // ============================================================
-    //  HELPER METHODS
-    // ============================================================
+    
+    
+    
 
     static void printResult(String id, String input, String expected, String given) {
         boolean pass = expected.equals(given);
@@ -663,16 +660,13 @@ public class SmartWasteTestRunner {
         System.out.println(CYAN + "==========================================================" + RESET);
     }
 
-    /**
-     * Reset DataStore singleton for clean test isolation.
-     * Uses reflection to reset the private static instance.
-     */
+    
     static void resetDataStore() {
         try {
             java.lang.reflect.Field instance = DataStore.class.getDeclaredField("instance");
             instance.setAccessible(true);
             instance.set(null, null);
-            DataStore.getInstance(); // Re-initialize
+            DataStore.getInstance(); 
         } catch (Exception e) {
             System.out.println("  [WARN] Could not reset DataStore: " + e.getMessage());
         }

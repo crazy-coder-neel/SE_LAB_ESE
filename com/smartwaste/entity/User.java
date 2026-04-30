@@ -1,17 +1,13 @@
 package com.smartwaste.entity;
 
-/**
- * User Entity Class - Base class for all system users.
- * Part of the Entity layer in Boundary-Control-Entity pattern.
- * Supports role-based access: Citizen, Admin, Driver.
- */
+
 public class User {
     private String userId;
     private String username;
     private String password;
     private String role;
 
-    // Constructor
+    
     public User(String userId, String username, String password, String role) {
         this.userId = userId;
         this.username = username;
@@ -19,7 +15,7 @@ public class User {
         this.role = role;
     }
 
-    // Getters and Setters
+    
     public String getUserId() { return userId; }
     public void setUserId(String userId) { this.userId = userId; }
 

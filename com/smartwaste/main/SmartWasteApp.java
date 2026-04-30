@@ -4,38 +4,15 @@ import com.smartwaste.boundary.*;
 import com.smartwaste.entity.*;
 import java.util.Scanner;
 
-/**
- * SmartWasteApp - Main entry point for the Smart Waste Management System.
- * Implements CLI-based menu navigation for Citizen, Admin, and Driver roles.
- *
- * Architecture: Boundary-Control-Entity (BCE) Pattern
- * Use Case: Report Overflowing Bin
- *
- * System Flow:
- * 1. User logs in via LoginUI
- * 2. Role-based menu is displayed
- * 3. Citizen can report bins and view status
- * 4. Admin can view reports, assign vehicles, update status
- * 5. Driver can view tasks and mark them completed
- *
- * Pre-loaded Test Credentials:
- * - Citizen: citizen1/pass123 (Ward-A), citizen2/pass456 (Ward-B)
- * - Admin:   admin1/admin123
- * - Driver:  driver1/driver123, driver2/driver456
- *
- * Valid Bin IDs: BIN001, BIN002 (Ward-A), BIN003, BIN004 (Ward-B), BIN005 (Ward-A)
- * Valid Vehicle IDs: VH001, VH002, VH003
- */
+
 public class SmartWasteApp {
 
     private static Scanner scanner = new Scanner(System.in);
     private static User currentUser = null;
 
-    /**
-     * Main method - application entry point.
-     */
+    
     public static void main(String[] args) {
-        // Initialize DataStore (loads sample data)
+        
         DataStore.getInstance();
 
         System.out.println("==============================================");
@@ -74,11 +51,7 @@ public class SmartWasteApp {
         scanner.close();
     }
 
-    /**
-     * Display the main menu (before login).
-     * Enforces TC_02: Users must login before accessing any features.
-     * @return false if user chooses to exit
-     */
+    
     private static boolean showMainMenu() {
         System.out.println("\n=========================================");
         System.out.println("            MAIN MENU");
@@ -103,10 +76,7 @@ public class SmartWasteApp {
         }
     }
 
-    /**
-     * Display the Citizen menu after successful login.
-     * Provides options to report overflowing bins and view complaint status.
-     */
+    
     private static void showCitizenMenu() {
         Citizen citizen = (Citizen) currentUser;
         ReportObinUI reportUI = new ReportObinUI(scanner);
@@ -141,10 +111,7 @@ public class SmartWasteApp {
         }
     }
 
-    /**
-     * Display the Admin menu after successful login.
-     * Provides options to view reports, assign vehicles, and update status.
-     */
+    
     private static void showAdminMenu() {
         AdminUI adminUI = new AdminUI(scanner);
 
@@ -181,10 +148,7 @@ public class SmartWasteApp {
         }
     }
 
-    /**
-     * Display the Driver menu after successful login.
-     * Provides options to view assigned tasks and mark them completed.
-     */
+    
     private static void showDriverMenu() {
         Driver driver = (Driver) currentUser;
         DriverUI driverUI = new DriverUI(scanner);

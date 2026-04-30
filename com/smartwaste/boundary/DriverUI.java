@@ -6,11 +6,7 @@ import com.smartwaste.entity.Reports;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-/**
- * DriverUI - Boundary class for the Driver dashboard.
- * Provides CLI interface for drivers to view assigned tasks
- * and mark bin collections as completed.
- */
+
 public class DriverUI {
     private Scanner scanner;
     private VehicleAssignmentController vehicleController;
@@ -20,9 +16,7 @@ public class DriverUI {
         this.vehicleController = new VehicleAssignmentController();
     }
 
-    /**
-     * Display all tasks assigned to the logged-in driver.
-     */
+    
     public void displayAssignedTasks(Driver driver) {
         System.out.println("\n=========================================");
         System.out.println("      DRIVER - ASSIGNED TASKS");
@@ -44,9 +38,7 @@ public class DriverUI {
         }
     }
 
-    /**
-     * Allow driver to mark a task as completed (TC_15).
-     */
+    
     public void updateTaskStatus(Driver driver) {
         System.out.println("\n=========================================");
         System.out.println("    DRIVER - MARK TASK COMPLETED");

@@ -1,17 +1,13 @@
 package com.smartwaste.entity;
 
-/**
- * Bin Entity Class - Represents a waste collection bin in the system.
- * Each bin has a unique ID, location (ward), fill level, and status.
- * Status is determined by IoTController based on fill level.
- */
+
 public class Bin {
     private String binId;
     private String location;
     private int fillLevel;
     private String status;
 
-    // Constructor
+    
     public Bin(String binId, String location, int fillLevel, String status) {
         this.binId = binId;
         this.location = location;
@@ -19,7 +15,7 @@ public class Bin {
         this.status = status;
     }
 
-    // Getters and Setters
+    
     public String getBinId() { return binId; }
     public void setBinId(String binId) { this.binId = binId; }
 

@@ -1,12 +1,9 @@
 package com.smartwaste.entity;
 
-/**
- * Admin Entity Class - Represents an administrator who manages complaints.
- * Inherits from User. Admin can view reports, assign vehicles, and update status.
- */
+
 public class Admin extends User {
 
-    // Constructor
+    
     public Admin(String userId, String username, String password) {
         super(userId, username, password, "Admin");
     }
